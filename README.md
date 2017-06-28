@@ -5,10 +5,11 @@ Enhanced MapThread for Kolbot (D2Bot#)
 ![alt text](https://github.com/DetectiveSquirrel/Kolbot-MapThread/blob/master/resources/image1.png "NEW VS OLD")
 
 ## Features
-### Resistances are shown as Norma Nightmare Hell
+### Resistances are shown as Normal Nightmare Hell
 - These are what youll will have being in each difficulty
 
 ### Stats are shown (if you have them)
+- This can be repositioned holding 'Left Control' and clicking your 'Middle Mouse', leftting go of 'Left Control' will end the repositioning
 - Only some stats are shown as its hard for me to get the right stat id's but there is enough for it to be be usefull
 - Its very scalable and you can add your own very easily in line 449~, if you dont know what youre doing there dont touch it
 - List is as follows

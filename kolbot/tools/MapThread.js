@@ -38,6 +38,7 @@ include("common/KeyboardMap.js");
 
 Config.init();
 
+
 /*
 	Keybinds can be found here: www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 
@@ -45,11 +46,6 @@ Config.init();
 	Example: http://puu.sh/wwrjb/810d137b08.jpg
 */
 
-var ChaosAssitantSecondary = {
-	// Char name in game to tell to leave party (specifically for custom Follower.js)
-	// Case SeNsItIvE
-	CharName: "SJF"
-};
 var Keybinds = {
 	// Auto Tele
 	NextArea: 			[96, "Next Area"],
@@ -71,6 +67,14 @@ var Keybinds = {
 	ChaosDiablo: 			[56, "Chaos Assistant: Go To Star"],
 	ChaosToggleOpenSeal: 	[57, "Chaos Assistant: Toggle Seal Activation"],
 	ChaosCharToLeaveTeam: 	[48, "Chaos Assistant: Sends leave team message"]
+};
+
+// Custom addition for drDentist, pay no mind to this.
+// Associated with Keybinds.ChaosCharToLeaveTeam
+var ChaosAssitantSecondary = {
+	// Char name in game to tell to leave party (specifically for custom Follower.js)
+	// Case SeNsItIvE
+	CharName: "SJF"
 };
 
 var SaveInfo = {
@@ -462,7 +466,7 @@ var Hooks = {
 				["Mana After Kill", 		Color.Blue+"+ "+me.getStat(138)+" Mana after Each Kill", 				138, 0],
 				["DMG To Mana", 			Color.Blue+me.getStat(114)+"% Damage Taken Goes to Mana", 				114, 0],
 				["Mana Regen", 				Color.Blue+me.getStat(27)+"% Mana Regeneration", 						27, 0],
-				["mana Leech", 				Color.Blue+me.getStat(62)+"% Mana Stolen per Hit", 						62, 0],
+				["Mana Leech", 				Color.Blue+me.getStat(62)+"% Mana Stolen per Hit", 						62, 0],
 
 				["Life Leech", 				Color.Red+me.getStat(60)+"% Life Stolen per Hit", 						60, 0],
 				["Life Replenish", 			Color.Red+"Replenish Life + " + me.getStat(74), 						74, 0],
@@ -2305,18 +2309,6 @@ function main() {
 
 		if (actions.length > 0) {
 			switch (actions[0]) {
-				case ".count keys": // Say T H D Keys
-					var	tkeys = me.findItems("pk1", 0).length || 0,
-						hkeys = me.findItems("pk2", 0).length || 0,
-						dkeys = me.findItems("pk3", 0).length || 0;
-
-					say("Terror: " + tkeys);
-					say("Hate: " + hkeys);
-					say("Destruction: " + dkeys);
-
-					actions.shift();
-
-					break;
 				case ".find shrine": // Included for DrDentist, Finds xp shrine in area and makes portal
 					if (Misc.getShrinesInArea(me.area, 15, false)) {
 						Pather.makePortal();
@@ -2427,51 +2419,6 @@ function unitDrawTextSize(unit) {
 			break;
 	}
 	return false;
-}
-
-function getResist(unit) {
-	var string 					= "",
-		ImmunitySymbol 			= "I",
-		InfinityMinusRes 		= -85,
-		InfinityConvictionState = 28,
-		FireRes 				= 39,
-		LightningRes 			= 41,
-		ColdRes 				= 43,
-		PoisonRes 				= 45,
-		MagicRes 				= 37,
-		PhysicalRes 			= 36,
-		ImmuneRes 				= 100,
-		InfinityImmuneRes 		= 117;
-
-		if (unit.getState(InfinityConvictionState)) {
-			if (unit.getStat(FireRes) >= InfinityImmuneRes)
-				string += Color.Red + ImmunitySymbol;
-			if (unit.getStat(LightningRes) >= InfinityImmuneRes)
-				string += Color.Yellow + ImmunitySymbol;
-			if (unit.getStat(ColdRes) >= InfinityImmuneRes)
-				string += Color.Blue + ImmunitySymbol;
-			if (unit.getStat(MagicRes) >= ImmuneRes)
-				string += Color.Orange + ImmunitySymbol;
-			if (unit.getStat(PhysicalRes) >= ImmuneRes)
-				string += Color.Gold + ImmunitySymbol;
-			if (unit.getStat(PoisonRes) >= ImmuneRes)
-				string += Color.Green + ImmunitySymbol;
-		} else {
-			if (unit.getStat(FireRes) >= ImmuneRes)
-				string += Color.Red + ImmunitySymbol;
-			if (unit.getStat(LightningRes) >= ImmuneRes)
-				string += Color.Yellow + ImmunitySymbol;
-			if (unit.getStat(ColdRes) >= ImmuneRes)
-				string += Color.Blue + ImmunitySymbol;
-			if (unit.getStat(MagicRes) >= ImmuneRes)
-				string += Color.Orange + ImmunitySymbol;
-			if (unit.getStat(PhysicalRes) >= ImmuneRes)
-				string += Color.Gold + ImmunitySymbol;
-			if (unit.getStat(PoisonRes) >= ImmuneRes)
-				string += Color.Green + ImmunitySymbol;
-		}
-
-	return string;
 }
 
 function showResistances(type) {
