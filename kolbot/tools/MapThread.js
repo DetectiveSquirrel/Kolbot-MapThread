@@ -645,129 +645,7 @@ var Hooks = {
 	text: {
 		hooks: [],
 		enabled: true,
-		ResistanceHooks: {
-			FireRes: {
-				Box: {
-					X: 65,
-					Y: 437,
-					Width: 130,
-					Height: 13
-				},
-				Text: {
-					X: 65,
-					Y: 437,
-					Offset: 11,
-					Text: "Fire Res: " + showResistances("fire")
-				}
-			},
-			ColdRes: {
-				Box: {
-					X: 65,
-					Y: 450,
-					Width: 130,
-					Height: 13
-				},
-				Text: {
-					X: 65,
-					Y: 450,
-					Offset: 11,
-					Text: "Cold Res: " + showResistances("cold")
-				}
-			},
-			LightningRes: {
-				Box: {
-					X: 65,
-					Y: 463,
-					Width: 130,
-					Height: 13
-				},
-				Text: {
-					X: 65,
-					Y: 463,
-					Offset: 11,
-					Text: "Light Res: " + showResistances("light")
-				}
-			},
-			PoisonRes: {
-				Box: {
-					X: 65,
-					Y: 476,
-					Width: 130,
-					Height: 13
-				},
-				Text: {
-					X: 65,
-					Y: 476,
-					Offset: 11,
-					Text: "Psn Res: " + showResistances("poisn")
-				}
-			},
-		},
-
-
-		check: function () {
-			if (!this.enabled) {
-				this.flush();
-
-				return;
-			}
-
-			if (!this.getHook("menuBox")) {
-				this.add("menuBox");
-			}
-
-			if (!this.getHook("manaP")) {
-				this.add("manaP");
-			} else {
-				this.getHook("manaP").hook.text = Math.floor((me.mp/me.mpmax)*100).toString() + "%";
-			}
-
-			if (!this.getHook("healthP")) {
-				this.add("healthP");
-			} else {
-				this.getHook("healthP").hook.text = Math.floor((me.hp/me.hpmax)*100).toString() + "%";
-			}
-
-			if (!this.getHook("chickenP")) {
-				this.add("chickenP");
-			}
-
-			if (!this.getHook("FireRes")) {
-				this.add("FireRes");
-			} else {
-				this.getHook("FireRes").hook.text = "Fire Res: " + showResistances("fire");
-				this.getHook("FireRes").hook.zorder = 13;
-				this.getHook("FireResBorder").hook.zorder = 12;
-				this.getHook("FireResBackground").hook.zorder = 11;
-			}
-
-			if (!this.getHook("ColdRes")) {
-				this.add("ColdRes");
-			} else {
-				this.getHook("ColdRes").hook.text = "Cold Res: " + showResistances("cold");
-				this.getHook("ColdRes").hook.zorder = 13;
-				this.getHook("ColdResBorder").hook.zorder = 12;
-				this.getHook("ColdResBackground").hook.zorder = 11;
-			}
-
-			if (!this.getHook("LightRes")) {
-				this.add("LightRes");
-			} else {
-				this.getHook("LightRes").hook.text = "Light Res: " + showResistances("light");
-				this.getHook("LightRes").hook.zorder = 13;
-				this.getHook("LightResBorder").hook.zorder = 12;
-				this.getHook("LightResBackground").hook.zorder = 11;
-			}
-
-			if (!this.getHook("PoisnRes")) {
-				this.add("PoisnRes");
-			} else {
-				this.getHook("PoisnRes").hook.text = "Psn Res: " + showResistances("poisn");
-				this.getHook("PoisnRes").hook.zorder = 13;
-				this.getHook("PoisnResBorder").hook.zorder = 12;
-				this.getHook("PoisnResBackground").hook.zorder = 11;
-			}
-		},
+		ResistanceHooks: {},
 
 		updateResText: function () {
 			this.ResistanceHooks = {
@@ -828,6 +706,72 @@ var Hooks = {
 					}
 				},
 			};
+		},
+
+		check: function () {
+			if (!this.enabled) {
+				this.flush();
+
+				return;
+			}
+
+			var ResHooks = Hooks.text.ResistanceHooks;
+
+			if (!this.getHook("menuBox")) {
+				this.add("menuBox");
+			}
+
+			if (!this.getHook("manaP")) {
+				this.add("manaP");
+			} else {
+				this.getHook("manaP").hook.text = Math.floor((me.mp/me.mpmax)*100).toString() + "%";
+			}
+
+			if (!this.getHook("healthP")) {
+				this.add("healthP");
+			} else {
+				this.getHook("healthP").hook.text = Math.floor((me.hp/me.hpmax)*100).toString() + "%";
+			}
+
+			if (!this.getHook("chickenP")) {
+				this.add("chickenP");
+			}
+
+			if (!this.getHook("FireRes")) {
+				this.add("FireRes");
+			} else {
+				this.getHook("FireRes").hook.text = ResHooks.FireRes.Text.Text;
+				this.getHook("FireRes").hook.zorder = 13;
+				this.getHook("FireResBorder").hook.zorder = 12;
+				this.getHook("FireResBackground").hook.zorder = 11;
+			}
+
+			if (!this.getHook("ColdRes")) {
+				this.add("ColdRes");
+			} else {
+				this.getHook("ColdRes").hook.text = ResHooks.ColdRes.Text.Text;
+				this.getHook("ColdRes").hook.zorder = 13;
+				this.getHook("ColdResBorder").hook.zorder = 12;
+				this.getHook("ColdResBackground").hook.zorder = 11;
+			}
+
+			if (!this.getHook("LightRes")) {
+				this.add("LightRes");
+			} else {
+				this.getHook("LightRes").hook.text = ResHooks.LightningRes.Text.Text;
+				this.getHook("LightRes").hook.zorder = 13;
+				this.getHook("LightResBorder").hook.zorder = 12;
+				this.getHook("LightResBackground").hook.zorder = 11;
+			}
+
+			if (!this.getHook("PoisnRes")) {
+				this.add("PoisnRes");
+			} else {
+				this.getHook("PoisnRes").hook.text = ResHooks.PoisonRes.Text.Text;
+				this.getHook("PoisnRes").hook.zorder = 13;
+				this.getHook("PoisnResBorder").hook.zorder = 12;
+				this.getHook("PoisnResBackground").hook.zorder = 11;
+			}
 		},
 
 		add: function (name) {
