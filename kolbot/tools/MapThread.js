@@ -769,11 +769,69 @@ var Hooks = {
 			}
 		},
 
+		updateResText: function () {
+			this.ResistanceHooks = {
+				FireRes: {
+					Box: {
+						X: 65,
+						Y: 437,
+						Width: 130,
+						Height: 13
+					},
+					Text: {
+						X: 65,
+						Y: 437,
+						Offset: 11,
+						Text: "Fire Res: " + showResistances("fire")
+					}
+				},
+				ColdRes: {
+					Box: {
+						X: 65,
+						Y: 450,
+						Width: 130,
+						Height: 13
+					},
+					Text: {
+						X: 65,
+						Y: 450,
+						Offset: 11,
+						Text: "Cold Res: " + showResistances("cold")
+					}
+				},
+				LightningRes: {
+					Box: {
+						X: 65,
+						Y: 463,
+						Width: 130,
+						Height: 13
+					},
+					Text: {
+						X: 65,
+						Y: 463,
+						Offset: 11,
+						Text: "Light Res: " + showResistances("light")
+					}
+				},
+				PoisonRes: {
+					Box: {
+						X: 65,
+						Y: 476,
+						Width: 130,
+						Height: 13
+					},
+					Text: {
+						X: 65,
+						Y: 476,
+						Offset: 11,
+						Text: "Psn Res: " + showResistances("poisn")
+					}
+				},
+			};
+		},
+
 		add: function (name) {
-			var resHeight = 536,
-				ResHooks = Hooks.text.ResistanceHooks;
-
-
+			var ResHooks = Hooks.text.ResistanceHooks;
 
 			switch (name) {
 			case "monsterStatus":
@@ -1411,6 +1469,7 @@ var Hooks = {
 		}
 
 		this.monsters.check();
+		this.text.updateResText();
 		this.text.check();
 		this.vector.check();
 		this.tele.check();
@@ -1421,6 +1480,7 @@ var Hooks = {
 
 	flush: function () {
 		this.monsters.flush();
+		this.text.updateResText();
 		this.text.flush();
 		this.vector.flush();
 		this.tele.flush();
